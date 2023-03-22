@@ -33,9 +33,9 @@ server端:
 
 - 配置文件(参照格式即可)
 
-  服务器：`/ExileTestPlatformServer/config/pro.int`
+  服务器环境：`/ExileTestPlatformServer/config/pro.int`
 
-  本地(自行创建)：`/ExileTestPlatformServer/config/dev.int`
+  本地环境(自行创建)：`/ExileTestPlatformServer/config/dev.int`
 
 ### Web端部署
 
@@ -110,6 +110,11 @@ pipenv install
 
 查看版本:
     nginx -v
+```
+```shell
+开启端口:
+    iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+    iptables -I INPUT -p tcp --dport 5000 -j ACCEPT
 ```
 
 参照下图修改`/ExileTestPlatformServer/exile_nginx_for_server.conf`配置文件，复制到服务器`/etc/nginx/conf.d`中，涉及路劲需要先创建
