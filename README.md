@@ -39,14 +39,34 @@ server端:
 
 ### Web端部署
 
-- 方法一：`本地`完成`npm`打包后放置服务器对应的目录下。
-    ```shell
+方法一：`本地`完成`npm`打包后放置服务器对应的目录下。
 
-    ```  
-- 方法二：`服务器`完成`npm`打包后放置对应的目录下。
-    ```shell
+下载(推荐版本v12及以上)：[Node.js](https://nodejs.org/en)
 
-    ``` 
+  ```shell
+  cd /目录/ExileTestPlatformWeb
+  
+  安装依赖:
+      npm i
+  
+  打包生成dist文件:
+      npm run build  
+  
+  ```  
+
+方法二：`服务器`完成`npm`打包后放置对应的目录下。
+
+下载(推荐版本v12及以上)：[Node.js](https://nodejs.org/en/download)
+
+```shell
+cd /目录/ExileTestPlatformWeb
+
+安装依赖:
+npm i
+
+打包生成dist文件:
+npm run build  
+``` 
 
 ### Server端部署
 
@@ -111,6 +131,7 @@ pipenv install
 查看版本:
     nginx -v
 ```
+
 ```shell
 开启端口:
     iptables -I INPUT -p tcp --dport 80 -j ACCEPT
