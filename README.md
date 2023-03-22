@@ -1,6 +1,25 @@
 # 项目部署
 
-### 数据相关自行安装
+### 安装`git`以及拉取项目
+
+```shell
+apt-get install git -y
+git --version
+```
+
+```shell
+cd /srv
+
+web端:
+    git clone https://github.com/ExileLine/ExileTestPlatformWeb.git
+    
+server端:
+    git clone https://github.com/ExileLine/ExileTestPlatformServer.git
+```
+
+### 数据库相关
+
+自行准备或参开如下安装
 
 - Mysql（`5.7`，`8.0`，或以上）
 
@@ -11,13 +30,7 @@
 
     - 参考：[Redis安装](./install_redis.md)
 
-### Web端
-
-- 拉取项目
-
-    ```shell
-    git clone https://github.com/ExileLine/ExileTestPlatformWeb.git
-    ```
+### Web端部署
 
 - 方法一：`本地`完成`npm`打包后放置服务器对应的目录下。
     ```shell
@@ -28,7 +41,7 @@
 
     ``` 
 
-### 服务端
+### Server端部署
 
 #### 安装相关依赖
 
@@ -46,17 +59,12 @@ sudo apt install build-essential zlib1g-dev libssl-dev libncurses5-dev libreadli
 `CentOS(7)`
 
 ```shell
-yum update
+sudo yum update
+sudo yum -y install wget gcc atuomake
+sudo yum -y install devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils
+sudo yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel python3-devel libffi-devel epel-release centos-release-scl
+sudo yum install -y gcc-c++ libstdc++-static ant cmake byacc flex automake libtool binutils-devel bison ncurses-devel gcc kernel-devel libatomic
 ```
-
-- 安装`git`以及拉取项目
-    ```shell
-    apt-get install git -y
-    ```
-
-    ```shell
-    git clone https://github.com/ExileLine/ExileTestPlatformServer.git
-    ```
 
 #### 安装Python3
 
@@ -89,6 +97,15 @@ pip install celery -i https://pypi.doubanio.com/simple
 查看版本:
     nginx -v
 ```
+
+参照下图修改`/ExileTestPlatformServer/exile_nginx_for_server.conf`配置文件，复制到服务器`/etc/nginx/conf.d`中
+
+- ![exile_cover](imgs/nginx_docs.png)
+
+    ```shell
+    重启Nginx:
+        nginx -s reload
+    ```
 
 #### 宿主机部署(如果使用`docker`部署忽略此步骤)
 
