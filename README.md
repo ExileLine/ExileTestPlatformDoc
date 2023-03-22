@@ -19,7 +19,7 @@ server端:
 
 ### 数据库相关
 
-自行准备或参开如下安装
+自行准备或参考如下安装
 
 - Mysql（`5.7`，`8.0`，或以上）
 
@@ -123,26 +123,34 @@ pip install celery -i https://pypi.doubanio.com/simple
 
 ### 启动相关
 
+#### 使用Docker启动
+
 - 启动`Docker`快捷启动脚本 [server_start.sh](server_start.sh) 根据需要配置好对应的容器卷映射后执行即可。
-    - 进入项目
 
-          cd ExileTestPlatformServer
+  ```shell
+  cd /目录/ExileTestPlatformServer
+  sh server_start.sh
+  ```
 
-    - 执行sh脚本
+#### 宿主机启动
 
-          sh server_start.sh
+```shell
+cd /目录
+uwsgi --ini /ExileTestPlatformServer/exile_uwsgi_for_server.ini
+```
 
+#### 启动`Celery`异步任务
 
-- 启动`Celery`异步任务
-    ```shell
-    进入项目:
-        cd ExileTestPlatformServer
+```shell
+cd /目录/ExileTestPlatformServer
+
+进入env:
+    pipenv shell
+```
+
+- 后台启动例子，其他启动命令查阅 `/ExileTestPlatformServer/celery_app.py`
+  ```shell
+  PS:先创建好目录，如：/srv/logs
   
-    进入env:
-        pipenv shell
-    ```
-
-    - 后台启动例子，其他启动命令查阅 `/ExileTestPlatformServer/celery_app.py`
-      ```shell
-      celery -A celery_app.cel multi start worker --pidfile="/srv/logs/celery/%n.pid" --logfile="/srv/logs/celery/%n%I.log"
-      ```
+  celery -A celery_app.cel multi start worker --pidfile="/srv/logs/celery/%n.pid" --logfile="/srv/logs/celery/%n%I.log"
+  ```
