@@ -63,5 +63,5 @@ python -m pip install --upgrade pip
 
 返回继续部署
 
-- [传送门](./README.md)
+- [传送门](./README.md#安装python39)
 
