@@ -89,6 +89,7 @@ pip install celery -i https://pypi.doubanio.com/simple
 ```
 
 #### 安装项目依赖
+
 ```shell
 cd /ExileTestPlatformServer
 pipenv install
@@ -98,34 +99,62 @@ pipenv install
 
 ```shell
 安装:
-    apt-get install nginx
+    apt-get install nginx -y
 
 查看版本:
     nginx -v
 ```
 
-参照下图修改`/ExileTestPlatformServer/exile_nginx_for_server.conf`配置文件，复制到服务器`/etc/nginx/conf.d`中
+参照下图修改`/ExileTestPlatformServer/exile_nginx_for_server.conf`配置文件，复制到服务器`/etc/nginx/conf.d`中，涉及路劲需要先创建
+如：`mkdir /srv/logs`
 
 - ![exile_cover](imgs/nginx_docs.png)
 
     ```shell
+    检查配置文件:
+        nginx -t
+  
     重启Nginx:
         nginx -s reload
     ```
 
-#### 宿主机部署(如果使用`docker`部署忽略此步骤)
-
-- 安装`Uwsgi`
-
-    - 参考：https://juejin.cn/post/6844903870250876935
-
-#### Docker部署(如果使用`宿主机`部署忽略此步骤)
+#### Docker部署
 
 - 安装`Docker`并部署以及`Dockerfile`
   ```shell
   安装:
       wget -qO- https://get.docker.com/ | sh
+  
+  查看版本:
+      docker -v
   ```
+- 配置国内源加速以及日志大小限制
+
+```shell
+vim /etc/docker/daemon.json
+
+{
+        "registry-mirrors" : [
+                   "https://mirror.ccs.tencentyun.com",
+                   "http://registry.docker-cn.com",
+                   "http://docker.mirrors.ustc.edu.cn",
+                   "http://hub-mirror.c.163.com"
+                 ],
+        "insecure-registries" : [
+                   "registry.docker-cn.com",
+                   "docker.mirrors.ustc.edu.cn"
+                 ],
+        "debug" : true,
+        "experimental" : true,
+        "log-driver":"json-file",
+        "log-opts": {"max-size":"500m", "max-file":"3"}
+}
+
+wq保存
+
+systemctl daemon-reload
+systemctl restart docker
+```
 
 ### 启动相关
 
@@ -137,13 +166,6 @@ pipenv install
   cd /目录/ExileTestPlatformServer
   sh server_start.sh
   ```
-
-#### 宿主机启动
-
-```shell
-cd /目录/ExileTestPlatformServer
-uwsgi --ini exile_uwsgi_for_server.ini
-```
 
 #### 启动`Celery`异步任务
 
@@ -159,3 +181,10 @@ cd /目录/ExileTestPlatformServer
 ```shell
 celery -A celery_app.cel multi start worker --pidfile="/srv/logs/celery/%n.pid" --logfile="/srv/logs/celery/%n%I.log"
 ```
+
+### 备注
+
+- 查阅相关文章
+    - https://juejin.cn/post/6844903870250876935
+    - https://juejin.cn/post/7054460759526342687
+  
