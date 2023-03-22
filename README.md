@@ -148,9 +148,8 @@ cd /目录/ExileTestPlatformServer
     pipenv shell
 ```
 
-- 后台启动例子，其他启动命令查阅 `/ExileTestPlatformServer/celery_app.py`
-  ```shell
-  PS:先创建好目录，如：/srv/logs
-  
-  celery -A celery_app.cel multi start worker --pidfile="/srv/logs/celery/%n.pid" --logfile="/srv/logs/celery/%n%I.log"
-  ```
+后台启动例子，其他启动命令查阅 `/ExileTestPlatformServer/celery_app.py`（先创建好目录，如：/srv/logs）
+
+```shell
+celery -A celery_app.cel multi start worker --pidfile="/srv/logs/celery/%n.pid" --logfile="/srv/logs/celery/%n%I.log"
+```
