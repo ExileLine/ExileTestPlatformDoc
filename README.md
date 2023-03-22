@@ -30,6 +30,13 @@ server端:
 
     - 参考：[Redis安装](./install_redis.md)
 
+
+- 配置文件(参照格式即可)
+
+  服务器：`/ExileTestPlatformServer/config/pro.int`
+
+  本地(自行创建)：`/ExileTestPlatformServer/config/dev.int`
+
 ### Web端部署
 
 - 方法一：`本地`完成`npm`打包后放置服务器对应的目录下。
@@ -66,7 +73,7 @@ sudo yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-de
 sudo yum install -y gcc-c++ libstdc++-static ant cmake byacc flex automake libtool binutils-devel bison ncurses-devel gcc kernel-devel libatomic
 ```
 
-#### 安装Python3
+#### 安装Python3.9
 
 - [传送门](./install_python.md)
 
@@ -130,37 +137,38 @@ pipenv install
   ```
 - 配置国内源加速以及日志大小限制
 
-```shell
-vim /etc/docker/daemon.json
-
-{
-        "registry-mirrors" : [
-                   "https://mirror.ccs.tencentyun.com",
-                   "http://registry.docker-cn.com",
-                   "http://docker.mirrors.ustc.edu.cn",
-                   "http://hub-mirror.c.163.com"
-                 ],
-        "insecure-registries" : [
-                   "registry.docker-cn.com",
-                   "docker.mirrors.ustc.edu.cn"
-                 ],
-        "debug" : true,
-        "experimental" : true,
-        "log-driver":"json-file",
-        "log-opts": {"max-size":"500m", "max-file":"3"}
-}
-
-wq保存
-
-systemctl daemon-reload
-systemctl restart docker
-```
+  ```shell
+  vim /etc/docker/daemon.json
+  
+  {
+          "registry-mirrors" : [
+                     "https://mirror.ccs.tencentyun.com",
+                     "http://registry.docker-cn.com",
+                     "http://docker.mirrors.ustc.edu.cn",
+                     "http://hub-mirror.c.163.com"
+                   ],
+          "insecure-registries" : [
+                     "registry.docker-cn.com",
+                     "docker.mirrors.ustc.edu.cn"
+                   ],
+          "debug" : true,
+          "experimental" : true,
+          "log-driver":"json-file",
+          "log-opts": {"max-size":"500m", "max-file":"3"}
+  }
+  
+  wq保存
+  
+  systemctl daemon-reload
+  systemctl restart docker
+  ```
 
 ### 启动相关
 
 #### 使用Docker启动
 
-- 启动`Docker`快捷启动脚本 [server_start.sh](server_start.sh) 根据需要配置好对应的容器卷映射后执行即可。
+- 启动`Docker`
+  快捷启动脚本 `/ExileTestPlatformServer/server_start.sh` [传送门](https://github.com/ExileLine/ExileTestPlatformServer/blob/main/server_start.sh)
 
   ```shell
   cd /目录/ExileTestPlatformServer
@@ -176,9 +184,11 @@ cd /目录/ExileTestPlatformServer
     pipenv shell
 ```
 
-后台启动例子，其他启动命令查阅 `/ExileTestPlatformServer/celery_app.py`（先创建好目录，如：/srv/logs）
+后台启动例子，其他启动命令查阅 `/ExileTestPlatformServer/celery_app.py` [传送门](https://github.com/ExileLine/ExileTestPlatformServer/blob/main/celery_app.py)
 
 ```shell
+先创建好目录，如：/srv/logs
+
 celery -A celery_app.cel multi start worker --pidfile="/srv/logs/celery/%n.pid" --logfile="/srv/logs/celery/%n%I.log"
 ```
 

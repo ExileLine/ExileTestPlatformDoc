@@ -33,17 +33,7 @@ cd redis-6.0.0
 vim redis.conf
 
 修改密码:
-requirepass 123456
-
-如果需要外部连接
-1.修改 
-  protected-mode 为 no
-
-2.修改(docker部署的服务不要修改这个) 
-    bind 127.0.0.1 为 bind 0.0.0.0
-        
-3.注释
-    bind 127.0.0.1 ::1
+requirepass 你的密码
 ```
 
 ### 启动相关
@@ -55,6 +45,7 @@ cd redis-6.0.0/src
 ```
 
 ```shell
+cd /redis-6.0.0/src
 ./redis-server /srv/redis-6.0.0/redis.conf &
 ```
 	
