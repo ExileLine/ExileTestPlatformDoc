@@ -72,7 +72,7 @@ sudo yum install -y gcc-c++ libstdc++-static ant cmake byacc flex automake libto
 
 #### 安装`Pipenv`虚拟环境管理
 
-PS：如果使用非`3.9.4`版本，则需要修改 `/ExileTestPlatformServer/Pipfile` 中的 `python_version`版本号后继续往后的操作
+PS：如果使用非`3.9`版本，则需要修改 `/ExileTestPlatformServer/Pipfile` 中的 `python_version`版本号后继续往后的操作
 
 ```shell
 pip install pipenv
@@ -86,6 +86,12 @@ pip install pipenv -i https://pypi.doubanio.com/simple
 pip install celery
 或:
 pip install celery -i https://pypi.doubanio.com/simple
+```
+
+#### 安装项目依赖
+```shell
+cd /ExileTestPlatformServer
+pipenv install
 ```
 
 #### 安装`Nginx`以及配置文件
@@ -135,8 +141,8 @@ pip install celery -i https://pypi.doubanio.com/simple
 #### 宿主机启动
 
 ```shell
-cd /目录
-uwsgi --ini /ExileTestPlatformServer/exile_uwsgi_for_server.ini
+cd /目录/ExileTestPlatformServer
+uwsgi --ini exile_uwsgi_for_server.ini
 ```
 
 #### 启动`Celery`异步任务
