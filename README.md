@@ -33,15 +33,17 @@ server端:
 
 - 配置文件(参照格式即可)
 
-  服务器环境：`/ExileTestPlatformServer/config/pro.int`
+  服务器环境：`/ExileTestPlatformServer/config/pro.ini`
 
-  本地环境(自行创建)：`/ExileTestPlatformServer/config/dev.int`
+  本地环境(自行创建)：`/ExileTestPlatformServer/config/dev.ini`
 
 ### Web端部署
 
-方法一：`本地`完成`npm`打包后放置服务器对应的目录下。
+方法一(推荐)：`本地`完成`npm`打包后的`dist`文件夹放置`服务器`对应的目录下，如 `/srv` 目录下。
 
-下载(推荐版本v12及以上)：[Node.js](https://nodejs.org/en)
+方法二：`服务器`完成`npm`打包后的`dist`文件夹放置对应的目录下，如 `/srv` 目录下。
+
+下载(推荐版本v12及以上，根据对应的操作系统系安装即可)：[Node.js](https://nodejs.org/en/download)
 
   ```shell
   cd /目录/ExileTestPlatformWeb
@@ -50,23 +52,10 @@ server端:
       npm i
   
   打包生成dist文件:
-      npm run build  
-  
+      npm run build
+     
+  # 打包完成后根目录出现 dist 文件夹, 即：/ExileTestPlatformWeb/dist
   ```  
-
-方法二：`服务器`完成`npm`打包后放置对应的目录下。
-
-下载(推荐版本v12及以上)：[Node.js](https://nodejs.org/en/download)
-
-```shell
-cd /目录/ExileTestPlatformWeb
-
-安装依赖:
-npm i
-
-打包生成dist文件:
-npm run build  
-``` 
 
 ### Server端部署
 
@@ -83,7 +72,7 @@ sudo apt install gcc -y
 sudo apt install build-essential zlib1g-dev libssl-dev libncurses5-dev libreadline-dev libgdbm-dev libnss3-dev libffi-dev -y
 ```
 
-`CentOS(7)`
+`CentOS(7,8,9)`
 
 ```shell
 sudo yum update
@@ -99,7 +88,7 @@ sudo yum install -y gcc-c++ libstdc++-static ant cmake byacc flex automake libto
 
 #### 安装`Pipenv`虚拟环境管理
 
-PS：如果使用非`3.9`版本，则需要修改 `/ExileTestPlatformServer/Pipfile` 中的 `python_version`版本号后继续往后的操作
+PS：如果使用非`3.9`版本，则需要修改 `/ExileTestPlatformServer/Pipfile` 中的 `python_version` 版本号后继续往后的操作。
 
 ```shell
 pip install pipenv
@@ -107,12 +96,20 @@ pip install pipenv
 pip install pipenv -i https://pypi.doubanio.com/simple
 ```
 
-#### 安装`Celery`异步任务
+#### 安装`Celery`异步任务以及配置运行环境
 
 ```shell
 pip install celery
 或:
 pip install celery -i https://pypi.doubanio.com/simple
+```
+
+```shell
+vim ~/.bashrc
+export FLASK_ENV='production'
+
+wq保存并退出并生效配置文件
+source ~/.bashrc
 ```
 
 #### 安装项目依赖
@@ -139,7 +136,7 @@ pipenv install
 ```
 
 参照下图修改`/ExileTestPlatformServer/exile_nginx_for_server.conf`配置文件，复制到服务器`/etc/nginx/conf.d`中，涉及路劲需要先创建
-如：`mkdir /srv/logs`
+如：`mkdir /srv/logs` 前端`dist`文件夹根据存放的位置对应修改。
 
 - ![exile_cover](imgs/nginx_docs.png)
 
@@ -210,10 +207,10 @@ cd /目录/ExileTestPlatformServer
     pipenv shell
 ```
 
-后台启动例子，其他启动命令查阅 `/ExileTestPlatformServer/celery_app.py` [传送门](https://github.com/ExileLine/ExileTestPlatformServer/blob/main/celery_app.py)
+后台启动例子如下，其他启动命令查阅 `/ExileTestPlatformServer/celery_app.py` [传送门](https://github.com/ExileLine/ExileTestPlatformServer/blob/main/celery_app.py)
 
 ```shell
-先创建好目录，如：/srv/logs
+# 先创建好日志目录，如：/srv/logs 对应如下命令路径。
 
 celery -A celery_app.cel multi start worker --pidfile="/srv/logs/celery/%n.pid" --logfile="/srv/logs/celery/%n%I.log"
 ```
