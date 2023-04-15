@@ -2,9 +2,18 @@
 
 ### 安装`git`以及拉取项目
 
+`Debian` 或 `Ubuntu`
+
 ```shell
 apt-get install git -y
 git --version
+```
+
+`CentOS`
+
+```shell
+yum install -y git
+git version
 ```
 
 ```shell
