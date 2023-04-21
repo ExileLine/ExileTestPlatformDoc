@@ -40,7 +40,11 @@ sudo make && make install
 
 ### 创建python与python3和pip软连接
 
-PS:如果你需要使用多套Python环境请忽略此步骤并自行处理
+PS:如果你需要使用多套Python环境请忽略此步骤并自行处理，
+使用以下命令查看Python路径，后在设置软连接。
+```shell
+whereis python
+```
 
 ```shell
 vim ~/.bashrc

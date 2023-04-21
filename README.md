@@ -16,6 +16,8 @@ yum install -y git
 git version
 ```
 
+以下使用 `/srv` 路劲作为例子
+
 ```shell
 cd /srv
 
@@ -48,14 +50,14 @@ server端:
 
 ### Web端部署
 
-方法一(推荐)：`本地`完成`npm`打包后的`dist`文件夹放置`服务器`对应的目录下，如 `/srv` 目录下。
+方法一(推荐)：`本地`完成`npm`打包后的`dist`文件夹放置`服务器`对应的目录下。
 
-方法二：`服务器`完成`npm`打包后的`dist`文件夹放置对应的目录下，如 `/srv` 目录下。
+方法二：`服务器`完成`npm`打包后的`dist`文件夹放置对应的目录下。
 
 下载(推荐版本v12及以上，根据对应的操作系统系安装即可)：[Node.js](https://nodejs.org/en/download)
 
   ```shell
-  cd /目录/ExileTestPlatformWeb
+  cd ExileTestPlatformWeb
   
   安装依赖:
       npm i
@@ -124,8 +126,16 @@ source ~/.bashrc
 #### 安装项目依赖
 
 ```shell
-cd /ExileTestPlatformServer
+cd ExileTestPlatformServer
 pipenv install
+```
+
+#### 创建表
+
+```shell
+pipenv shell
+export FLASK_APP=ApplicationExample.py
+flask orm
 ```
 
 #### 安装`Nginx`以及配置文件
@@ -203,14 +213,14 @@ pipenv install
   快捷启动脚本 `/ExileTestPlatformServer/server_start.sh` [传送门](https://github.com/ExileLine/ExileTestPlatformServer/blob/main/server_start.sh)
 
   ```shell
-  cd /目录/ExileTestPlatformServer
+  cd /srv/ExileTestPlatformServer
   sh server_start.sh
   ```
 
 #### 启动`Celery`异步任务
 
 ```shell
-cd /目录/ExileTestPlatformServer
+cd /srv/ExileTestPlatformServer
 
 进入env:
     pipenv shell
