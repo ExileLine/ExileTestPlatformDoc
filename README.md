@@ -16,7 +16,7 @@ yum install -y git
 git version
 ```
 
-以下使用 `/srv` 路劲作为例子
+以下使用 `/srv` 路径作为例子
 
 ```shell
 cd /srv
@@ -154,7 +154,7 @@ flask orm
     iptables -I INPUT -p tcp --dport 5000 -j ACCEPT
 ```
 
-参照下图修改`/ExileTestPlatformServer/exile_nginx_for_server.conf`配置文件，复制到服务器`/etc/nginx/conf.d`中，涉及路劲需要先创建
+参照下图修改`/ExileTestPlatformServer/exile_nginx_for_server.conf`配置文件，复制到服务器`/etc/nginx/conf.d`中，涉及路径需要先创建
 如：`mkdir /srv/logs` 前端`dist`文件夹根据存放的位置对应修改。
 
 - ![exile_cover](imgs/nginx_docs.png)
