@@ -107,7 +107,7 @@ pip install pipenv
 pip install pipenv -i https://pypi.doubanio.com/simple
 ```
 
-#### 安装`Celery`异步任务以及配置运行环境
+#### 安装`Celery`异步任务
 
 ```shell
 pip install celery
@@ -115,9 +115,13 @@ pip install celery
 pip install celery -i https://pypi.doubanio.com/simple
 ```
 
+#### 配置`Flask`运行环境变量
+
 ```shell
 vim ~/.bashrc
 export FLASK_ENV='production'
+export FLASK_DEBUG=0
+export FLASK_APP='ApplicationExample.py'
 
 wq保存并退出并生效配置文件
 source ~/.bashrc
@@ -134,7 +138,6 @@ pipenv install
 
 ```shell
 pipenv shell
-export FLASK_APP=ApplicationExample.py
 flask orm
 ```
 
