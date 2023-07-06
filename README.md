@@ -170,6 +170,32 @@ flask orm
         nginx -s reload
     ```
 
+#### 安装`google-chrome`(如不使用`UI自动化`功能忽略此步骤，目前仅支持google)
+
+`Debian(9,10,11)` 或 `Ubuntu(18,20,21)`
+
+```shell
+	sudo apt install wget gdebi-core
+
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+	sudo gdebi google-chrome-stable_current_amd64.deb
+
+	sudo apt-get install xvfb
+
+	google-chrome --version
+```
+
+`CentOS(7,8,9)`
+
+```shell
+    yum install mesa-libOSMesa-devel gnu-free-sans-fonts wqy-zenhei-fonts
+
+    yum install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+
+    google-chrome --version
+```
+
 #### Docker部署
 
 - 安装`Docker`并部署以及`Dockerfile`
