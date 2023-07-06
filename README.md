@@ -170,7 +170,9 @@ flask orm
         nginx -s reload
     ```
 
-#### 安装`google-chrome`(如不使用`UI自动化`功能忽略此步骤，目前仅支持google)
+#### 安装`google-chrome`
+
+- 如不使用`UI自动化测试`功能忽略此步骤，目前仅支持google
 
 `Debian(9,10,11)` 或 `Ubuntu(18,20,21)`
 
