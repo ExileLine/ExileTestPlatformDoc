@@ -28,7 +28,7 @@ server端:
     git clone https://github.com/ExileLine/ExileTestPlatformServer.git
 ```
 
-## 一、使用`docker-compose`一键部署
+## 一、使用`docker-compose`一键部署(推荐)
 
 - 把前端打包的`dist`放在`/ExileTestPlatformServer/docker/volumes/web`下
 - 由于`docker-hub`在国内被墙，否则构建会失败。
@@ -37,12 +37,11 @@ server端:
     - 或使用自己的`DOCKER_REGISTRY`，配置查阅`/ExileTestPlatformServer/docker/.env.example`
 
 ```shell
-cd ExileTestPlatformServer
-cd cd docker
+cd /ExileTestPlatformServer/docker
 docker compose -p exile_test_platform up -d
 ```
 
-## 二、宿主机部署
+## 二、宿主机部署(比较繁琐)
 
 ### 相关数据库准备
 
