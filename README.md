@@ -28,7 +28,23 @@ server端:
     git clone https://github.com/ExileLine/ExileTestPlatformServer.git
 ```
 
-### 数据库相关
+## 一、使用`docker-compose`一键部署
+
+- 把前端打包的`dist`放在`/ExileTestPlatformServer/docker/volumes/web`下
+- 由于`docker-hub`在国内被墙，否则构建会失败。
+    - 你需要配置docker的源
+    - 或准备对应的镜像，查阅`/ExileTestPlatformServer/docker/docker-compose.yml`
+    - 或使用自己的`DOCKER_REGISTRY`，配置查阅`/ExileTestPlatformServer/docker/.env.example`
+
+```shell
+cd ExileTestPlatformServer
+cd cd docker
+docker compose -p exile_test_platform up -d
+```
+
+## 二、宿主机部署
+
+### 相关数据库准备
 
 自行准备或参考如下安装
 
